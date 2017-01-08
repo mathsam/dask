@@ -15,7 +15,7 @@ def fib(n):
            return a + b
 
 def create_dirs(dir_name, root_dir=r'Sandbox/dask/working'):
-    time.sleep(2)
+    time.sleep(1)
     home_dir = os.environ.get('HOME')
     root_dir = os.path.join(home_dir, root_dir)
     os.mkdir(os.path.join(root_dir, str(dir_name)))
@@ -29,13 +29,13 @@ def get_dirs(depend_on, root_dir=r'Sandbox/dask/working'):
     root_dir = os.path.join(home_dir, root_dir)
     dirs = glob.glob(os.path.join(root_dir, '*'))
     flags = []
-    with local_client() as lc:
-    #from distributed import Client
-    #with Client("node00:8786") as lc:
+    #with local_client() as lc:
+    from distributed import Client
+    with Client("node00:8786") as lc:
         for i_dir in dirs:
             flags.append(lc.submit(print_flag, i_dir))
         lc.garther(flags)
-        return flags
+    return None
 
 
 def print_flag(which_dir):

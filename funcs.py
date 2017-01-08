@@ -46,7 +46,6 @@ def launch_more_task(n):
         for i in range(n):
             message = "%d: %d from %s" %(i, n, os.environ.get('USER'))
             flags.append(lc.submit(print_flag, message))
-        lc.gather(flags)
     return None
 
 def print_flag(flag):

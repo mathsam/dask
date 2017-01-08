@@ -6,7 +6,7 @@ client.restart()
 
 from funcs import create_dirs, get_dirs, add_flag
 
-future = client.map(create_dirs, range(10))
+future = client.map(create_dirs, range(100))
 flags = client.submit(get_dirs, future)
 client.gather(flags)
 print(flags)

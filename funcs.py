@@ -37,6 +37,8 @@ def get_dirs(depend_on, root_dir=r'Sandbox/dask/working'):
 def add_flag(future_dir):
     time.sleep(2)
     print('create flag to %s' %future_dir)
+    if not os.path.isdir(future_dir):
+        os.makedirs(future_dir)
     f = open(os.path.join(future_dir, 'success.txt'), 'a')
     f.close()
     return None

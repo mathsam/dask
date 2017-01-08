@@ -29,7 +29,9 @@ def get_dirs(depend_on, root_dir=r'Sandbox/dask/working'):
     root_dir = os.path.join(home_dir, root_dir)
     dirs = glob.glob(os.path.join(root_dir, '*'))
     flags = []
-    with local_client() as lc:
+    #with local_client() as lc:
+    from distributed import Client
+    with Client("node00:8786") as lc:
         for i_dir in dirs:
             flags.append(lc.submit(print_flag, i_dir))
         return flags

@@ -34,13 +34,24 @@ def get_dirs(depend_on, root_dir=r'Sandbox/dask/working'):
     with Client("node00:8786") as lc:
         for i_dir in dirs:
             flags.append(lc.submit(print_flag, i_dir))
-        lc.garther(flags)
+        lc.gather(flags)
+    time.sleep(50)
     return None
 
+def launch_more_task(n):
+    time.sleep(1)
+    flags = []
+    from distributed import Client
+        with Client("node00:8786") as lc:
+            for i in range(n):
+                message = "%d: %d from %s" %(i, n, os.environ.get('USER'))
+                flags.append(lc.submit(print_flag, message))
+            lc.gather(flags)
+    return None
 
-def print_flag(which_dir):
+def print_flag(flag):
     time.sleep(2)
-    print(which_dir)
+    print(flag)
 
 def add_flag(future_dir):
     time.sleep(2)

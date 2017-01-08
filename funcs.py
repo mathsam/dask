@@ -42,11 +42,11 @@ def launch_more_task(n):
     time.sleep(1)
     flags = []
     from distributed import Client
-        with Client("node00:8786") as lc:
-            for i in range(n):
-                message = "%d: %d from %s" %(i, n, os.environ.get('USER'))
-                flags.append(lc.submit(print_flag, message))
-            lc.gather(flags)
+    with Client("node00:8786") as lc:
+        for i in range(n):
+            message = "%d: %d from %s" %(i, n, os.environ.get('USER'))
+            flags.append(lc.submit(print_flag, message))
+        lc.gather(flags)
     return None
 
 def print_flag(flag):

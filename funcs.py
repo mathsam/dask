@@ -31,8 +31,12 @@ def get_dirs(depend_on, root_dir=r'Sandbox/dask/working'):
     flags = []
     with local_client() as lc:
         for i_dir in dirs:
-            flags.append(lc.submit(add_flag, i_dir))
+            flags.append(lc.submit(print_flag, i_dir))
         return flags
+
+
+def print_flag(which_dir):
+    print(which_dir)
 
 def add_flag(future_dir):
     time.sleep(2)

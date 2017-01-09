@@ -8,4 +8,4 @@ from funcs import launch_more_task
 
 future = client.map(launch_more_task, range(10))
 client.gather(future)
-print(flags)
+print(future)

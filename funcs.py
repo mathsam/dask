@@ -39,7 +39,6 @@ def get_dirs(depend_on, root_dir=r'Sandbox/dask/working'):
     return None
 
 def launch_more_task(n):
-    time.sleep(1)
     flags = []
     from distributed import Client
     with Client("node00:8786") as lc:
@@ -49,7 +48,7 @@ def launch_more_task(n):
     return None
 
 def print_flag(flag):
-    time.sleep(2)
+    time.sleep(5)
     print(flag)
 
 def add_flag(future_dir):

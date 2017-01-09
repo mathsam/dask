@@ -2,6 +2,7 @@ from distributed import local_client
 import os
 import time
 import glob
+import datetime
 
 
 def fib(n):
@@ -45,11 +46,12 @@ def launch_more_task(n):
         for i in range(n):
             message = "%d: %d from %s" %(i, n, os.environ.get('USER'))
             flags.append(lc.submit(print_flag, message))
+            print('launch '+ str(datetime.datetime.now()) + ': ' + message)
     return None
 
 def print_flag(flag):
     time.sleep(5)
-    print(flag)
+    print(str(datetime.datetime.now()) + ': ' + flag)
 
 def add_flag(future_dir):
     time.sleep(2)
